@@ -1,48 +1,48 @@
-# Análise de Campos Eletromagnéticos de ERBs
+# Electromagnetic Field Analysis of Base Stations
 
-Este projeto realiza uma análise dos campos eletromagnéticos medidos em Estações Rádio Base (ERBs) no Brasil. Utiliza dados de medições eletromagnéticas e localizações geográficas das ERBs, aplicando técnicas de machine learning para explorar padrões e construir modelos preditivos.
+This project performs an analysis of electromagnetic fields measured at Base Stations (BS) in Brazil. It uses data from electromagnetic measurements and the geographical locations of base stations, applying machine learning techniques to explore patterns and build predictive models.
 
-## Dados
+## Data
 
-- **Medições de Campos Eletromagnéticos:** [Fonte](https://dados.gov.br/dados/conjuntos-dados/medicoes-de-campos-eletromagneticos1)
-- **Localizações das ERBs:** [Fonte](https://www.telecocare.com.br/mapaerbs/)
+- **Electromagnetic Field Measurements:** [Source](https://dados.gov.br/dados/conjuntos-dados/medicoes-de-campos-eletromagneticos1)
+- **BS Locations:** [Source](https://www.telecocare.com.br/mapaerbs/)
 
-## Etapas do Projeto
+## Project Steps
 
-### 1. Pré-processamento
-- **DataFrames:** Criação de `df` (medições) e `dferb` (localização de ERBs).
-- **Join:** Combinação dos dataframes em `mdf` para associar medições às ERBs.
+### 1. Preprocessing
+- **DataFrames:** Creation of `df` (measurements) and `dferb` (BS locations).
+- **Join:** Combining dataframes into `mdf` to associate measurements with their respective BS.
 
 ### 2. Feature Engineering
-- **Distância ERB-Ponto de Medição:** Cálculo usando a [Fórmula de Haversine](https://en.wikipedia.org/wiki/Haversine_formula).
+- **BS-Measurement Point Distance:** Calculation using the [Haversine Formula](https://en.wikipedia.org/wiki/Haversine_formula).
 
-### 3. Análise Exploratória de Dados (EDA)
-- **Empresas e Tipos de Medição:** Dados de 8 empresas em 4086 municípios, com medições fixas e de faixa larga.
-- **Mapas:** Extração de bounding boxes via [OpenStreetMap](https://www.openstreetmap.org/).
+### 3. Exploratory Data Analysis (EDA)
+- **Companies and Measurement Types:** Data from 8 companies across 4,086 municipalities, including both fixed and broadband measurements.
+- **Maps:** Bounding box extraction using [OpenStreetMap](https://www.openstreetmap.org/).
 
-### 4. Clusterização
-- **K-Means (k=5):** Clusterização das medições por regiões do Brasil.
-- **DBSCAN:** Agrupamento de medições próximas, relacionado às regiões de campo Fresnel e Fraunhofer.
+### 4. Clustering
+- **K-Means (k=5):** Clustering of measurements by Brazilian regions.
+- **DBSCAN:** Grouping of nearby measurements, related to Fresnel and Fraunhofer field regions.
 
-### 5. Correlação de Variáveis
-- **Latitude/Longitude:** Altamente correlacionadas, devido à proximidade das medições e ERBs.
-- **Valor Médio e % do Limite:** Correlação não-linear (% do Limite = 0.1275 * (Valor Médio)², correlação de 99,99%).
+### 5. Variable Correlation
+- **Latitude/Longitude:** Highly correlated due to the proximity of measurements to the BS.
+- **Mean Value and % of Limit:** Non-linear correlation (% of Limit = 0.1275 * (Mean Value)², with 99.99% correlation).
 
-### 6. Modelagem Supervisionada
-- Algoritmos: **LR, SGD, Ridge, Lasso, ElasticNet, KNR, DTR, ABR, RF**.
-- **Curvas de Aprendizado:** Overfitting em KNR e DTR; underfitting no ABR.
+### 6. Supervised Modeling
+- Algorithms: **LR, SGD, Ridge, Lasso, ElasticNet, KNR, DTR, ABR, RF**.
+- **Learning Curves:** Observed overfitting in KNR and DTR; underfitting in ABR.
 
-### 7. Feature Engineering Avançada
-- **Novas Features:** Potência, Ganho, Altura (Tx/Rx), Frequência.
-- **Impacto:** Melhorias no desempenho dos modelos após a inclusão dessas variáveis.
+### 7. Advanced Feature Engineering
+- **New Features:** Power, Gain, Height (Tx/Rx), Frequency.
+- **Impact:** Model performance improvements after including these variables.
 
-## Melhorias Futuras
-- Filtragem de outliers.
-- Explorar novas expressões matemáticas (inclinação das antenas).
-- Otimização dos modelos.
+## Future Improvements
+- Outlier filtering.
+- Exploring new mathematical expressions (e.g., antenna tilt).
+- Model optimization.
 
-## Referências
+## References
 
-- [Análise da Intensidade de Campo Elétrico de Estações Rádio-Base](https://www.inatel.br/revista/busca/144-5-analise-da-intensidade-de-campo-s504918-1/file)
+- [Electric Field Intensity Analysis of Base Stations](https://www.inatel.br/revista/busca/144-5-analise-da-intensidade-de-campo-s504918-1/file)
 - [Wibowo et al., 2010 - Electric Field Intensity](https://core.ac.uk/download/pdf/42954572.pdf)
 - [Arnold et al., 2010 - Power Consumption Modeling](https://www.semanticscholar.org/paper/Power-consumption-modeling-of-different-base-types-Arnold-Richter/da078d9f4c22c01e7acc4d85cc7bc929c61f3442/figure/2)
